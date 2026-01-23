@@ -8,7 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from flask_migrate import Migrate
 from sqlalchemy import Integer, String, ForeignKey                            # เพิ่ม import Foreignkey
 from sqlalchemy.orm import Mapped, mapped_column, relationship                # เพิ่ม import relatiohship
-
+from models import TodoItem, Comment, db
 
 app = Flask(__name__)
 CORS(app)
@@ -17,9 +17,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.db'
 class Base(DeclarativeBase):
   pass
 
-db = SQLAlchemy(app, model_class=Base)
-migrate = Migrate(app, db) 
+db.init_app(app)                                                     # แก้จาก db = SQLAlchemy(app, model_class=Base)
+migrate = Migrate(app, db)
 
+"""
 class TodoItem(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(100))
@@ -37,7 +38,8 @@ class TodoItem(db.Model):
                 comment.to_dict() for comment in self.comments
             ]
         }
-
+"""
+"""
 class Comment(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     message: Mapped[str] = mapped_column(String(250))
@@ -51,11 +53,11 @@ class Comment(db.Model):
             "message": self.message,
             "todo_id": self.todo_id
         }
-
+"""
 
 with app.app_context():
     db.create_all()
-
+"""
 INITIAL_TODOS = [
     TodoItem(title='Learn Flask'),
     TodoItem(title='Build a Flask App'),
@@ -66,6 +68,7 @@ with app.app_context():
          for item in INITIAL_TODOS:
              db.session.add(item)
          db.session.commit()
+"""
 
 todo_list = [
     { "id": 1,
