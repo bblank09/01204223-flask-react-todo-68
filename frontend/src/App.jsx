@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const TODOLIST_API_URL = 'http://localhost:5000/api/todos/';
+  const TODOLIST_API_URL = '/api/todos/';
 
   const [todoList, setTodoList] = useState([]);
   const [newTitle, setNewTitle] = useState("");
