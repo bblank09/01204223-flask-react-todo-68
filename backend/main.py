@@ -1,3 +1,5 @@
+from pprint import pp
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -18,7 +20,8 @@ import click
 
 app = Flask(__name__)
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI', 'sqlite:///todos.db') 
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY','')
 
 class Base(DeclarativeBase):
   pass
