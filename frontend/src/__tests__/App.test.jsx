@@ -22,11 +22,14 @@ const originalTodoList = [
 describe('App', () => {
   beforeEach(() => {
     vi.stubGlobal('fetch', vi.fn());
+    localStorage.setItem("username", "testuser");
+    localStorage.setItem("accessToken", "testtoken");
   });
 
   afterEach(() => {
     vi.resetAllMocks();
     vi.unstubAllGlobals();
+    localStorage.clear();
   });
 
   it('renders correctly', async () => {
